@@ -34,11 +34,17 @@ object Codificador {
       case 6 => coder = new Bipolar
       case 7 => coder = new Pseudoternary
       case 8 => coder = new ASK(1, 1)
-      case 9 => coder = new FSK(1, 1, 2)
+      case 9 => coder = new FSK(1, 2, 1)
       case 10 => coder = new PSK(1, 1)
     }
+    val bitsAxis = bits.zipWithIndex.map {
+      case (bit, index) => s"'$bit' ${index + 0.5}"
+    }.mkString(", ")
+    val vertLines = (1 to bits.length).map(i => s"set arrow from $i, graph 0 to $i, graph 1 nohead lc rgb 'grey'").mkString("\n")
     val out =
-      """set yrange [-2:2]
+      s"""set yrange [-2:2]
+        |set xtics ($bitsAxis)
+        |$vertLines
         |plot "-" with lines
         |
         |""".stripMargin ++
@@ -46,7 +52,6 @@ object Codificador {
       """
         |end
         |""".stripMargin
-    print(out)
     import scala.sys.process._
     "gnuplot -p" #< new ByteArrayInputStream(out.getBytes(StandardCharsets.UTF_8)) !
   }
