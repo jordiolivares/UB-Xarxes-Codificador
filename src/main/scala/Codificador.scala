@@ -10,7 +10,8 @@ object Codificador {
     println("""Entra la seqüencia de bits a codificar:""")
     val bits = StdIn.readLine()
     println(
-      """Selecciona el Codificador de la següent llista
+      """Selecciona el Codificador/Modulador de la següent llista
+        |Codificadors:
         |    1. Manchester
         |    2. Manchester Differential
         |    3. NRZ
@@ -18,6 +19,10 @@ object Codificador {
         |    5. NRZ-I
         |    6. Bipolar-Ami
         |    7. Pseudoternary
+        |Moduladors:
+        |    8. ASK
+        |    9. FSK
+        |   10. PSK
       """.stripMargin)
     var coder: Encoder = null
     StdIn.readInt() match {
@@ -28,6 +33,9 @@ object Codificador {
       case 5 => coder = new NonReturnToZeroInverted(bits.charAt(0))
       case 6 => coder = new Bipolar
       case 7 => coder = new Pseudoternary
+      case 8 => coder = new ASK(1, 1)
+      case 9 => coder = new FSK(1, 1, 2)
+      case 10 => coder = new PSK(1, 1)
     }
     val out =
       """set yrange [-2:2]
