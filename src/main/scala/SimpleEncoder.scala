@@ -20,16 +20,8 @@ class NonReturnToZeroLevel extends SimpleEncoder(NonReturnToZero.one, NonReturnT
 
 object Manchester {
   // We define the signals for each bit
-  val one =
-    """-1
-      |-1
-      |1
-      |1""".stripMargin
-  val zero =
-    """1
-      |1
-      |-1
-      |-1""".stripMargin
+  val one = Seq(-1, -1, 1, 1)
+  val zero = Seq(1, 1, -1, -1)
 }
 
 class Manchester extends SimpleEncoder(Manchester.zero, Manchester.one)
