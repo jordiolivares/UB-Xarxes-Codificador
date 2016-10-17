@@ -1,4 +1,4 @@
-import scala.math.{cos, Pi}
+import scala.math.{sin, Pi}
 
 abstract class SimpleContinuousEncoder extends Encoder {
   def one(x: Double): Double
@@ -15,18 +15,18 @@ abstract class SimpleContinuousEncoder extends Encoder {
 }
 
 class ASK(amp: Double, freq: Int) extends SimpleContinuousEncoder {
-  override def one(x: Double) = amp * cos(2 * Pi * freq * x)
+  override def one(x: Double) = amp * sin(2 * Pi * freq * x)
   override def zero(x: Double) = 0
 }
 
 class FSK(amp: Double, freq1: Int, freq0: Int) extends SimpleContinuousEncoder {
-  override def one(x: Double) = amp * cos(2 * Pi * freq1 * x)
-  override def zero(x: Double) = amp * cos(2 * Pi * freq0 * x)
+  override def one(x: Double) = amp * sin(2 * Pi * freq1 * x)
+  override def zero(x: Double) = amp * sin(2 * Pi * freq0 * x)
 }
 
 class PSK(amp: Double, freq: Double) extends SimpleContinuousEncoder {
-  override def one(x: Double) = amp * cos(2 * Pi * freq * x)
-  override def zero(x: Double) = amp * cos(2 * Pi * freq * x + Pi)
+  override def one(x: Double) = amp * sin(2 * Pi * freq * x + Pi)
+  override def zero(x: Double) = amp * sin(2 * Pi * freq * x)
 }
 
 
