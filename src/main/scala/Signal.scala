@@ -25,4 +25,10 @@ class Signal(signal: String) {
 object Signal {
   // I don't want to convert stuff, so we create a signal converter
   implicit def string2signal(str: String): Signal = new Signal(str)
+
+  implicit def constant2signal(int: Int): Signal = {
+    val signal = s"""$int
+                    |$int""".stripMargin
+    new Signal(signal)
+  }
 }

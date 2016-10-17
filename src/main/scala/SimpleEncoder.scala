@@ -4,19 +4,15 @@
 abstract class SimpleEncoder(val zero: Signal, val one: Signal) extends Encoder {
   def encode(bits: String): String = {
     bits.zipWithIndex.map {
-      case ('1', x) => one.at(x)
-      case ('0', x) => zero.at(x)
+      case ('1', x) => one at x
+      case ('0', x) => zero at x
     }.mkString("\n")
   }
 }
 
 object NonReturnToZero {
-  val one =
-    """1
-      |1""".stripMargin
-  val zero =
-    """0
-      |0""".stripMargin
+  val one = 1
+  val zero = 0
 }
 
 class NonReturnToZero extends SimpleEncoder(NonReturnToZero.zero, NonReturnToZero.one)
