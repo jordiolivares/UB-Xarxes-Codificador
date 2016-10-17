@@ -25,14 +25,14 @@ class NonReturnToZeroInverted(firstBit: Char) extends DifferentialEncoder {
   }
 
   override def equal(bit1: Char, bit2: Char, pos: Int): String = {
-    previousSignal.at(pos)
+    previousSignal at pos
   }
 
   override def switch(bit1: Char, bit2: Char, pos: Int): String = {
     val tmp = previousSignal
     this.previousSignal = switchSignal
     this.switchSignal = tmp
-    previousSignal.at(pos)
+    previousSignal at pos
   }
 }
 
@@ -49,7 +49,7 @@ class ManchesterDifferential(firstBit: Char) extends DifferentialEncoder {
   }
 
   override def equal(bit1: Char, bit2: Char, pos: Int): String = {
-    val result = nextSignal.at(pos)
+    val result = nextSignal at pos
     val tmp = currentSignal
     currentSignal = nextSignal
     nextSignal = tmp
@@ -57,6 +57,6 @@ class ManchesterDifferential(firstBit: Char) extends DifferentialEncoder {
   }
 
   override def switch(bit1: Char, bit2: Char, pos: Int): String = {
-    currentSignal.at(pos)
+    currentSignal at pos
   }
 }
