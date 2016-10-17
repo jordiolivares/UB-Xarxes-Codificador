@@ -16,6 +16,8 @@ object Codificador {
         |    3. NRZ
         |    4. NRZ-L
         |    5. NRZ-I
+        |    6. Bipolar-Ami
+        |    7. Pseudoternary
       """.stripMargin)
     var coder: Encoder = null
     StdIn.readInt() match {
@@ -24,9 +26,12 @@ object Codificador {
       case 3 => coder = new NonReturnToZero
       case 4 => coder = new NonReturnToZeroLevel
       case 5 => coder = new NonReturnToZeroInverted(bits.charAt(0))
+      case 6 => coder = new Bipolar
+      case 7 => coder = new Pseudoternary
     }
     val out =
-      """plot "-" with lines
+      """set yrange [-2:2]
+        |plot "-" with lines
         |
         |""".stripMargin ++
       coder.encode(bits) ++
