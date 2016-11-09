@@ -19,6 +19,8 @@ object Codificador {
         |    5. NRZ-I
         |    6. Bipolar-Ami
         |    7. Pseudoternary
+        |    8. B8ZS
+        |    9. HDB3
         |Moduladors:
         |    8. ASK
         |    9. FSK
@@ -33,9 +35,11 @@ object Codificador {
       case 5 => coder = new NonReturnToZeroInverted(bits.charAt(0))
       case 6 => coder = new Bipolar
       case 7 => coder = new Pseudoternary
-      case 8 => coder = new ASK(1, 1)
-      case 9 => coder = new FSK(1, 2, 1)
-      case 10 => coder = new PSK(1, 1)
+      case 8 => coder = new B8ZS
+      case 9 => coder = new HDB3
+      case 10 => coder = new ASK(1, 1)
+      case 11 => coder = new FSK(1, 2, 1)
+      case 12 => coder = new PSK(1, 1)
     }
     val bitsAxis = bits.zipWithIndex.map {
       case (bit, index) => s"'$bit' ${index + 0.5}"
