@@ -1,14 +1,22 @@
 import java.io.ByteArrayInputStream
 import java.nio.charset.StandardCharsets
 
+import scala.util.Random
+
 /**
   * Created by jordi on 16/10/16.
   */
 object Codificador {
   def main(args: Array[String]): Unit = {
     import scala.io.StdIn
-    println("""Entra la seqüencia de bits a codificar:""")
-    val bits = StdIn.readLine()
+    println("""Entra la seqüencia de bits a codificar: (Prem ENTER si vols que sigui aleatoria)""")
+    val bits = {
+      val tmp = StdIn.readLine()
+      if (tmp.length == 0)
+        Seq.fill(20)(Random.nextInt(2).toString).mkString
+      else
+        tmp
+    }
     println(
       """Selecciona el Codificador/Modulador de la següent llista
         |Codificadors:
@@ -22,9 +30,9 @@ object Codificador {
         |    8. B8ZS
         |    9. HDB3
         |Moduladors:
-        |    8. ASK
-        |    9. FSK
-        |   10. PSK
+        |   10. ASK
+        |   11. FSK
+        |   12. PSK
       """.stripMargin)
     var coder: Encoder = null
     StdIn.readInt() match {
